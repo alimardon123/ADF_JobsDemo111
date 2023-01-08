@@ -1,0 +1,9 @@
+{
+	"name": "JobsDemo111",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2faa67c4-53be-4016-98c9-21ac8615edd1",
+		"tenantId": "0444c8b3-f9b4-4713-973e-2c7b55d668fc"
+	}
+}

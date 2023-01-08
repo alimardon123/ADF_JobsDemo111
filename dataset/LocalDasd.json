@@ -1,0 +1,17 @@
+{
+	"name": "LocalDasd",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MainServerDasdDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "studentsage"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

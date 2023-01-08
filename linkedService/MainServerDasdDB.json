@@ -1,0 +1,16 @@
+{
+	"name": "MainServerDasdDB",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=WIN-9FUNF0I045R;initial catalog=dasd;user id=Ali",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5MWU1ZDZiMC1kN2IzLTQ4YTQtODg0Yi0zZGE2MGFmNDljNTgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "MyMainDesktop",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

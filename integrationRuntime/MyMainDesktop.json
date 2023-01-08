@@ -1,0 +1,6 @@
+{
+	"name": "MyMainDesktop",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

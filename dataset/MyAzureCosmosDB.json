@@ -1,0 +1,16 @@
+{
+	"name": "MyAzureCosmosDB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CosmosDbNoSql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CosmosDbSqlApiCollection",
+		"schema": {},
+		"typeProperties": {
+			"collectionName": "demo1"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
