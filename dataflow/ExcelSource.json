@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSQLWithoutParameter",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
 				}
 			],
 			"sinks": [
@@ -27,6 +34,9 @@
 				},
 				{
 					"name": "split1"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -39,9 +49,20 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          ID as integer,",
+				"          Name as string,",
+				"          Age as integer,",
+				"          PhoneNumber as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
 				"split1@NamesWithS derive(RecordDate = currentDate()) ~> derivedColumn1",
-				"source1 split(startsWith(Name, 'B'),",
+				"union1 split(startsWith(Name, 'B'),",
 				"     disjoint: true) ~> split1@(NamesWithS)",
+				"source1, source2 union(byName: true)~> union1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['ConditionalSplit.csv'],",
