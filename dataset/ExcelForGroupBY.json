@@ -1,0 +1,47 @@
+{
+	"name": "ExcelForGroupBY",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EmpRevenue.xlsx",
+				"folderPath": "Input",
+				"container": "main"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Id",
+				"type": "String"
+			},
+			{
+				"name": "Name",
+				"type": "String"
+			},
+			{
+				"name": "Department",
+				"type": "String"
+			},
+			{
+				"name": "Total Revenue",
+				"type": "String"
+			},
+			{
+				"name": "Total Cost",
+				"type": "String"
+			},
+			{
+				"name": "Total Profit",
+				"type": "String"
+			}
+		]
+	}
+}
