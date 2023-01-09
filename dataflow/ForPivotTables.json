@@ -24,6 +24,10 @@
 			"transformations": [
 				{
 					"name": "pivot1"
+				},
+				{
+					"name": "MapDrifted1",
+					"description": "Creates an explicit mapping for each drifted column"
 				}
 			],
 			"scriptLines": [
@@ -43,7 +47,28 @@
 				"     {} = sum({Total Revenue}),",
 				"     columnNaming: '$N$V',",
 				"     lateral: true) ~> pivot1",
-				"pivot1 sink(allowSchemaDrift: true,",
+				"pivot1 derive(Jorj1 = toLong(byName('Jorj1')),",
+				"          Jorj10 = toLong(byName('Jorj10')),",
+				"          Jorj11 = toLong(byName('Jorj11')),",
+				"          Jorj12 = toLong(byName('Jorj12')),",
+				"          Jorj13 = toLong(byName('Jorj13')),",
+				"          Jorj14 = toLong(byName('Jorj14')),",
+				"          Jorj15 = toLong(byName('Jorj15')),",
+				"          Jorj16 = toLong(byName('Jorj16')),",
+				"          Jorj17 = toLong(byName('Jorj17')),",
+				"          Jorj18 = toLong(byName('Jorj18')),",
+				"          Jorj19 = toLong(byName('Jorj19')),",
+				"          Jorj2 = toLong(byName('Jorj2')),",
+				"          Jorj20 = toLong(byName('Jorj20')),",
+				"          Jorj21 = toLong(byName('Jorj21')),",
+				"          Jorj3 = toLong(byName('Jorj3')),",
+				"          Jorj4 = toLong(byName('Jorj4')),",
+				"          Jorj5 = toLong(byName('Jorj5')),",
+				"          Jorj6 = toLong(byName('Jorj6')),",
+				"          Jorj7 = toLong(byName('Jorj7')),",
+				"          Jorj8 = toLong(byName('Jorj8')),",
+				"          Jorj9 = toLong(byName('Jorj9'))) ~> MapDrifted1",
+				"MapDrifted1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['PivotTransformation.csv'],",
 				"     skipDuplicateMapInputs: true,",
