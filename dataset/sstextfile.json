@@ -28,11 +28,11 @@
 				"type": "String"
 			},
 			{
-				"name": "firstname",
+				"name": "first name",
 				"type": "String"
 			},
 			{
-				"name": "lastname",
+				"name": "last name",
 				"type": "String"
 			},
 			{
