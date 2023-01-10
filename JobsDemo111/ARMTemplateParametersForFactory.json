@@ -8,6 +8,9 @@
 		"AzureBlobStorage_connectionString": {
 			"value": ""
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
 		"Azure_edwdemo_MyDemoDB_connectionString": {
 			"value": ""
 		},
@@ -17,8 +20,11 @@
 		"MainServerDasdDB_connectionString": {
 			"value": ""
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"value": ""
+		"triggerForFileInput_properties_Video51EventTriggers_parameters_FileName": {
+			"value": "@triggerBody().fileName"
+		},
+		"triggerForFileInput_properties_typeProperties_scope": {
+			"value": "/subscriptions/d21d6d46-3667-4383-86fe-e470ff05edfe/resourceGroups/myResource/providers/Microsoft.Storage/storageAccounts/alimardonstorage"
 		}
 	}
 }
