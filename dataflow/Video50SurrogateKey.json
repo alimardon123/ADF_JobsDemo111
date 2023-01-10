@@ -108,8 +108,9 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
-				"          each(match(!(startsWith(name, 'Sur') || startsWith(name, 'Max'))),",
-				"               replace($$, ' ', '') = $$)",
+				"          each(match(!(startsWith(name, 'Sur') || startsWith(name, 'Max') || startsWith(name, 'Id'))),",
+				"               replace($$, ' ', '') = $$),",
+				"          id = Id",
 				"     )) ~> sink1"
 			]
 		}
