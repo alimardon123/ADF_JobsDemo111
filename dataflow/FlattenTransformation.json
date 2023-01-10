@@ -1,0 +1,69 @@
+{
+	"name": "FlattenTransformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SampleJson",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Azure_MyDemoDB",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flatten1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          address as (city as string, state as string, streetAddress as string),",
+				"          age as string,",
+				"          firstName as string,",
+				"          gender as string,",
+				"          lastName as string,",
+				"          phoneNumbers as (number as string, type as string)[]",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     modifiedAfter: (toTimestamp(1673308800930L)),",
+				"     documentForm: 'arrayOfDocuments') ~> source1",
+				"source1 foldDown(unroll(phoneNumbers, phoneNumbers),",
+				"     mapColumn(",
+				"          number = phoneNumbers.number,",
+				"          type = phoneNumbers.type,",
+				"          city = address.city,",
+				"          age,",
+				"          state = address.state,",
+				"          streetAddress = address.streetAddress,",
+				"          firstName,",
+				"          gender,",
+				"          lastname = lastName",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}
