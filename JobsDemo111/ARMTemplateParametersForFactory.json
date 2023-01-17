@@ -20,6 +20,9 @@
 		"MainServerDasdDB_connectionString": {
 			"value": ""
 		},
+		"TumbleWindowTr_properties_pipeline_parameters_starttime": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
 		"triggerForFileInput_properties_Video51EventTriggers_parameters_FileName": {
 			"value": "@triggerBody().fileName"
 		},
