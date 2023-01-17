@@ -2224,6 +2224,55 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Video55XmlFileData')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Video55XMLFlatten",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {
+										"FileName": "Video55XMLData.csv"
+									}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Video55XMLFlatten')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Video5_ForeachLoop')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2800,6 +2849,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/InputBooksXML')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Xml",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Books.xml",
+						"folderPath": "Input",
+						"container": "main"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/InputFolder')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3225,7 +3298,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "Video54",
@@ -3258,7 +3331,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -3787,6 +3860,70 @@
 				"[concat(variables('factoryId'), '/datasets/sstextfile')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSQLWithoutParameter')]",
 				"[concat(variables('factoryId'), '/datasets/Azure_MyDemoDB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Video55XMLFlatten')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "InputBooksXML",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "OutPut",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "flatten1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          {urn:Test.Namespace,Root} as ({urn:Test.Namespace,catalog} as ({urn:Test.Namespace,book} as ({@id} as string, {urn:Test.Namespace,author} as string, {urn:Test.Namespace,genre} as string, {urn:Test.Namespace,price} as double, {urn:Test.Namespace,publish_date} as date, {urn:Test.Namespace,title} as string)[]))",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     validationMode: 'xsd',",
+						"     namespaces: true) ~> source1",
+						"source1 foldDown(unroll({urn:Test.Namespace,Root}.{urn:Test.Namespace,catalog}.{urn:Test.Namespace,book}),",
+						"     mapColumn(",
+						"          id = {urn:Test.Namespace,Root}.{urn:Test.Namespace,catalog}.{urn:Test.Namespace,book}.{@id},",
+						"          author = {urn:Test.Namespace,Root}.{urn:Test.Namespace,catalog}.{urn:Test.Namespace,book}.{urn:Test.Namespace,author},",
+						"          genre = {urn:Test.Namespace,Root}.{urn:Test.Namespace,catalog}.{urn:Test.Namespace,book}.{urn:Test.Namespace,genre},",
+						"          price = {urn:Test.Namespace,Root}.{urn:Test.Namespace,catalog}.{urn:Test.Namespace,book}.{urn:Test.Namespace,price},",
+						"          publish_date = {urn:Test.Namespace,Root}.{urn:Test.Namespace,catalog}.{urn:Test.Namespace,book}.{urn:Test.Namespace,publish_date},",
+						"          title = {urn:Test.Namespace,Root}.{urn:Test.Namespace,catalog}.{urn:Test.Namespace,book}.{urn:Test.Namespace,title}",
+						"     ),",
+						"     skipDuplicateMapInputs: false,",
+						"     skipDuplicateMapOutputs: false) ~> flatten1",
+						"flatten1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     partitionFileNames:['MyXmlSampleData.csv'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/InputBooksXML')]",
+				"[concat(variables('factoryId'), '/datasets/OutPut')]"
 			]
 		}
 	]
