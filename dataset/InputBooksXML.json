@@ -1,0 +1,19 @@
+{
+	"name": "InputBooksXML",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Xml",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Books.xml",
+				"folderPath": "Input",
+				"container": "main"
+			}
+		}
+	}
+}
