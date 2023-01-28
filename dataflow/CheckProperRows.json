@@ -1,0 +1,98 @@
+{
+	"name": "CheckProperRows",
+	"properties": {
+		"folder": {
+			"name": "Real_Time_Scenarios"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "BlobRowCheck",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Real_Time_01BadRows",
+						"type": "DatasetReference"
+					},
+					"name": "BadRowsTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "Real_Time_01",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RowChecking"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ID as string,",
+				"          Name as string,",
+				"          Date as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     rowUrlColumn: 'FileName') ~> source1",
+				"source1 split(isNull(toDate(Date, \"dd-MMM-yyyy\")),",
+				"     disjoint: true) ~> RowChecking@(BadRows, GoodRows)",
+				"RowChecking@GoodRows derive(ID = toInteger(ID),",
+				"          Date = toDate(Date, \"dd-MMM-yyyy\")) ~> derivedColumn1",
+				"RowChecking@BadRows sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Id as string,",
+				"          Name as string,",
+				"          Date as string,",
+				"          FileName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> BadRowsTable",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Id as integer,",
+				"          Name as string,",
+				"          Date as date,",
+				"          FileName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Id = ID,",
+				"          Name,",
+				"          Date,",
+				"          FileName",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
