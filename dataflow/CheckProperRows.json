@@ -50,7 +50,7 @@
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'FileName') ~> source1",
 				"source1 split(isNull(toDate(Date, \"dd-MMM-yyyy\")),",
-				"     disjoint: true) ~> RowChecking@(BadRows, GoodRows)",
+				"     disjoint: false) ~> RowChecking@(BadRows, GoodRows)",
 				"RowChecking@GoodRows derive(ID = toInteger(ID),",
 				"          Date = toDate(Date, \"dd-MMM-yyyy\")) ~> derivedColumn1",
 				"RowChecking@BadRows sink(allowSchemaDrift: true,",
