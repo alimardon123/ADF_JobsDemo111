@@ -111,6 +111,9 @@
 				"type": "string"
 			}
 		},
+		"folder": {
+			"name": "VideoClasses"
+		},
 		"annotations": [],
 		"lastPublishTime": "2023-01-07T18:45:19Z"
 	},

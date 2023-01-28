@@ -100,7 +100,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "@concat('select count(*) as cnt from AzureTest\n  where ModifiedDate >= convert(datetime, ''',\n  pipeline().parameters.starttime,''')')",
+						"sqlReaderQuery": {
+							"value": "@concat('select count(*) as cnt from AzureTest\n  where ModifiedDate >= convert(datetime, ''',\n  pipeline().parameters.starttime,''')')",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -115,6 +118,9 @@
 			"starttime": {
 				"type": "string"
 			}
+		},
+		"folder": {
+			"name": "VideoClasses"
 		},
 		"annotations": []
 	}

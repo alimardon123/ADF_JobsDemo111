@@ -1,6 +1,9 @@
 {
 	"name": "Video49UpsertRecords",
 	"properties": {
+		"folder": {
+			"name": "VideoClasses"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
@@ -50,7 +53,7 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
 				"          each(match(true()),",
-				"               replace($$, ' ', '') = $$)",
+				"               replace($$,' ','') = $$)",
 				"     )) ~> sink1"
 			]
 		}

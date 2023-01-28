@@ -1,6 +1,9 @@
 {
 	"name": "ForPivotTables",
 	"properties": {
+		"folder": {
+			"name": "VideoClasses"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

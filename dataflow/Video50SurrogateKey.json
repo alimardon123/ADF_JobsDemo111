@@ -1,6 +1,9 @@
 {
 	"name": "Video50SurrogateKey",
 	"properties": {
+		"folder": {
+			"name": "VideoClasses"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
@@ -108,9 +111,9 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
-				"          each(match(!(startsWith(name, 'Sur') || startsWith(name, 'Max') || startsWith(name, 'Id'))),",
-				"               replace($$, ' ', '') = $$),",
-				"          id = Id",
+				"          id = Id,",
+				"          each(match(!(startsWith(name,'Sur')||startsWith(name,'Max')||startsWith(name,'Id'))),",
+				"               replace($$,' ','') = $$)",
 				"     )) ~> sink1"
 			]
 		}

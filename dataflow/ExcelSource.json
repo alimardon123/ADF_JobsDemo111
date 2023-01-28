@@ -1,6 +1,9 @@
 {
 	"name": "ExcelSource",
 	"properties": {
+		"folder": {
+			"name": "VideoClasses"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

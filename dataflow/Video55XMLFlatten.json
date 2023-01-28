@@ -1,6 +1,9 @@
 {
 	"name": "Video55XMLFlatten",
 	"properties": {
+		"folder": {
+			"name": "VideoClasses"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

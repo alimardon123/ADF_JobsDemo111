@@ -94,6 +94,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -208,6 +209,9 @@
 			"ErrorDetails": {
 				"type": "String"
 			}
+		},
+		"folder": {
+			"name": "VideoClasses"
 		},
 		"annotations": []
 	}
