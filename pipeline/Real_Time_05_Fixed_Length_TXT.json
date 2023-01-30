@@ -1,0 +1,35 @@
+{
+	"name": "Real_Time_05_Fixed_Length_TXT",
+	"properties": {
+		"activities": [
+			{
+				"name": "Real_Time_05_Transfrom_Fixed_Length_To_CSV",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Real_Time_05_Transfrom_Fixed_Length_To_CSV",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "Real_Time_Scenarios"
+		},
+		"annotations": []
+	}
+}
