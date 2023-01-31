@@ -1,0 +1,56 @@
+{
+	"name": "Real_Time_07_RemoveDublicates",
+	"properties": {
+		"folder": {
+			"name": "Real_Time_Scenarios"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Source6",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "Source9",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "union1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ID as string,",
+				"          FirstName as string,",
+				"          LName as string,",
+				"          Address as string,",
+				"          phoneNumber as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          ID as string,",
+				"          FirstName as string,",
+				"          LName as string,",
+				"          Address as string,",
+				"          phoneNumber as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source2",
+				"source1 union(byName: true)~> union1"
+			]
+		}
+	}
+}
