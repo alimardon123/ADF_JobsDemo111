@@ -1,0 +1,32 @@
+{
+	"name": "Real_T_06_Logging",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Real_Time_06_Log_Pipeline_Run",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2023-01-31T11:21:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						24
+					],
+					"hours": [
+						11
+					]
+				}
+			}
+		}
+	}
+}
