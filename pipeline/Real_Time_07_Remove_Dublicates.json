@@ -17,7 +17,12 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "Real_Time_07_RemoveDublicates",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sink1": {
+								"FileName": "DDD.csv"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
