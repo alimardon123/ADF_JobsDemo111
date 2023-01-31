@@ -14,18 +14,10 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Day",
+				"frequency": "Minute",
 				"interval": 1,
 				"startTime": "2023-01-31T11:21:00",
-				"timeZone": "West Asia Standard Time",
-				"schedule": {
-					"minutes": [
-						38
-					],
-					"hours": [
-						16
-					]
-				}
+				"timeZone": "West Asia Standard Time"
 			}
 		}
 	}
