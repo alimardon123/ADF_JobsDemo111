@@ -34,23 +34,38 @@
 					"storedProcedureName": "[dbo].[up_PopulatePipelineLogsRT_06]",
 					"storedProcedureParameters": {
 						"ADfName": {
-							"value": "",
+							"value": {
+								"value": "@pipeline().DataFactory",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"PipelineName": {
-							"value": "",
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"RunId": {
-							"value": "",
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"TriggerName": {
-							"value": "",
+							"value": {
+								"value": "@pipeline().TriggerName",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"TriggerTime": {
-							"value": "",
+							"value": {
+								"value": "@pipeline().TriggerTime",
+								"type": "Expression"
+							},
 							"type": "DateTime"
 						}
 					}
