@@ -77,9 +77,6 @@
 					},
 					"CosmosDbNoSql_connectionString": {
 						"value": "[parameters('CosmosDbNoSql_connectionString')]"
-					},
-					"MainServerDasdDB_connectionString": {
-						"value": "[parameters('MainServerDasdDB_connectionString')]"
 					}
 				}
 			},
@@ -98,6 +95,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"MainServerDasdDB_connectionString": {
+						"value": "[parameters('MainServerDasdDB_connectionString')]"
 					}
 				}
 			},
@@ -118,6 +118,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'JobsDemo111_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "JobsDemo111_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"triggerForFileInput_properties_Video51EventTriggers_parameters_FileName": {
 						"value": "[parameters('triggerForFileInput_properties_Video51EventTriggers_parameters_FileName')]"
@@ -131,7 +151,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'JobsDemo111_ArmTemplate_1')]"
+				"[resourceId('Microsoft.Resources/deployments', 'JobsDemo111_ArmTemplate_2')]"
 			]
 		}
 	]
